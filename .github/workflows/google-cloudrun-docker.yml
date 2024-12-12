@@ -58,6 +58,14 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.name }}         
 
+      - name: Set up Docker Compose
+        run: |
+          docker compose version
+
+      - name: Build and Start Services with Docker Compose
+        run: |
+          docker compose up -d
+
       # Continuous Deployment
       - name: Google Auth
         id: auth
