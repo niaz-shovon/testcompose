@@ -30,10 +30,14 @@ jobs:
           VERSION="${{ github.run_number }}"
           REGISTRY="${REGION}-docker.pkg.dev"
           REPOSITORY="${REGISTRY}/${PROJECT_ID}/${REPOSITORY_ID}"
-          TAGS="${REPOSITORY}/${DOCKER_IMAGE}:${VERSION}"
+          TAG_APP1="${REPOSITORY}/app1:${VERSION}"
+          TAG_APP2="${REPOSITORY}/app2:${VERSION}"
+          TAG_APP3="${REPOSITORY}/app3:${VERSION}"
           echo "registry=${REGISTRY}" >> $GITHUB_OUTPUT
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
-          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+          echo "tag_app1=${TAG_APP1}" >> $GITHUB_OUTPUT
+          echo "tag_app2=${TAG_APP2}" >> $GITHUB_OUTPUT
+          echo "tag_app3=${TAG_APP3}" >> $GITHUB_OUTPUT
           echo "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
@@ -46,25 +50,24 @@ jobs:
           username: _json_key
           password: ${{ env.GCP_SA_KEY }}
 
-      - name: Build and push image
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: ${{ steps.prep.outputs.tags }}
-          labels: |
-            org.opencontainers.image.created=${{ steps.prep.outputs.created }}
-            org.opencontainers.image.source=${{ github.repositoryUrl }}
-            org.opencontainers.image.version=${{ steps.prep.outputs.version }}
-            org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.licenses=${{ github.event.repository.license.name }}         
-
-      - name: Set up Docker Compose
+      - name: Build and push app1 image
         run: |
-          docker compose version
+          docker build ./app1 -t ${{ steps.prep.outputs.tag_app1 }}
+          docker push ${{ steps.prep.outputs.tag_app1 }}
 
-      - name: Build and Start Services with Docker Compose
+      - name: Build and push app2 image
         run: |
-          docker compose up -d
+          docker build ./app2 -t ${{ steps.prep.outputs.tag_app2 }}
+          docker push ${{ steps.prep.outputs.tag_app2 }}
+
+      - name: Build and push app3 image
+        run: |
+          docker build ./app3 -t ${{ steps.prep.outputs.tag_app3 }}
+          docker push ${{ steps.prep.outputs.tag_app3 }}
+
+      - name: Deploy with Docker Compose
+        run: |
+          docker compose -f docker-compose.yml up -d
 
       # Continuous Deployment
       - name: Google Auth
@@ -87,7 +90,7 @@ jobs:
           region: ${{ env.REGION }}
           flags: --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
           # NOTE: If using a pre-built image, update the image name here
-          image: ${{ steps.prep.outputs.tags }}
+          image: ${{ steps.prep.outputs.tag_app1 }}
 
       # Cloud Run URL output
       - name: Show Output
