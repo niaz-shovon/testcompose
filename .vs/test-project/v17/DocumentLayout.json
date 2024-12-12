@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\shovon.BDJOBS\\Desktop\\new-workflow-test\\test-project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5D093F9F-69B9-4D36-B56B-083F9EC45038}|app1\\app1.csproj|c:\\users\\shovon.bdjobs\\desktop\\new-workflow-test\\test-project\\app1\\app1.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{5D093F9F-69B9-4D36-B56B-083F9EC45038}|app1\\app1.csproj|solutionrelative:app1\\app1.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "app1",
+              "DocumentMoniker": "C:\\Users\\shovon.BDJOBS\\Desktop\\new-workflow-test\\test-project\\app1\\app1.csproj",
+              "RelativeDocumentMoniker": "app1\\app1.csproj",
+              "ToolTip": "C:\\Users\\shovon.BDJOBS\\Desktop\\new-workflow-test\\test-project\\app1\\app1.csproj",
+              "RelativeToolTip": "app1\\app1.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-11T07:19:26.991Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
