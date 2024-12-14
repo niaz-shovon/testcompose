@@ -68,6 +68,9 @@ jobs:
       - name: Deploy with Docker Compose
         run: |
           docker compose -f docker-compose.yml up -d
+          docker push ${{ steps.prep.outputs.tag_app1 }}
+          docker push ${{ steps.prep.outputs.tag_app2 }}
+          docker push ${{ steps.prep.outputs.tag_app3 }}
 
       # Continuous Deployment
 #      - name: Google Auth
