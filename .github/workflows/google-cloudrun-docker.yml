@@ -67,7 +67,7 @@ jobs:
 
       - name: Deploy with Docker Compose
         run: |
-          docker compose docker-compose.yml
+          docker compose -f docker-compose.yml
 #          docker compose -f docker-compose.yml up -d
 
       # Continuous Deployment
