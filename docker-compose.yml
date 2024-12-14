@@ -25,6 +25,5 @@ services:
     image: app3:latest
     ports:
       - "5004:8080"
-      - "5005:8081"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
