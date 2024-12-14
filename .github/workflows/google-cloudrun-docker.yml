@@ -92,6 +92,6 @@ jobs:
           # NOTE: If using a pre-built image, update the image name here
 #          image: ${{ steps.prep.outputs.tag_app1 }}
 
-      # Cloud Run URL output
-#      - name: Show Output
-#        run: echo ${{ steps.deploy.outputs.url }}
+       Cloud Run URL output
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
