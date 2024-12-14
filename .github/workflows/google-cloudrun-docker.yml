@@ -50,20 +50,20 @@ jobs:
           username: _json_key
           password: ${{ env.GCP_SA_KEY }}
 
-      - name: Build and push app1 image
-        run: |
-          docker build ./app1 -t ${{ steps.prep.outputs.tag_app1 }}
-          docker push ${{ steps.prep.outputs.tag_app1 }}
+#      - name: Build and push app1 image
+#        run: |
+#          docker build ./app1 -t ${{ steps.prep.outputs.tag_app1 }}
+#          docker push ${{ steps.prep.outputs.tag_app1 }}
 
-      - name: Build and push app2 image
-        run: |
-          docker build ./app2 -t ${{ steps.prep.outputs.tag_app2 }}
-          docker push ${{ steps.prep.outputs.tag_app2 }}
+#      - name: Build and push app2 image
+#        run: |
+#          docker build ./app2 -t ${{ steps.prep.outputs.tag_app2 }}
+#          docker push ${{ steps.prep.outputs.tag_app2 }}
 
-      - name: Build and push app3 image
-        run: |
-          docker build ./app3 -t ${{ steps.prep.outputs.tag_app3 }}
-          docker push ${{ steps.prep.outputs.tag_app3 }}
+#      - name: Build and push app3 image
+#        run: |
+#          docker build ./app3 -t ${{ steps.prep.outputs.tag_app3 }}
+#          docker push ${{ steps.prep.outputs.tag_app3 }}
 
       - name: Deploy with Docker Compose
         run: |
