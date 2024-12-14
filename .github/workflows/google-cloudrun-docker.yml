@@ -67,17 +67,7 @@ jobs:
 
       - name: Deploy with Docker Compose
         run: |
-          docker compose docker-compose.yml
-#          docker compose -f docker-compose.yml up -d
-#          run: echo ${{ steps.prep.outputs.tag_app1 }}
-#          run: echo ${{ steps.prep.outputs.tag_app2 }}
-#          run: echo ${{ steps.prep.outputs.tag_app3 }}
-#          docker tag app1 asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1
-#          docker tag app2 asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app2
-#          docker tag app3 asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app3
-#          docker push ${{ steps.prep.outputs.tag_app1 }}
-#          docker push ${{ steps.prep.outputs.tag_app2 }}
-#          docker push ${{ steps.prep.outputs.tag_app3 }}
+          docker compose -f docker-compose.yml up -d
 
       # Continuous Deployment
 #      - name: Google Auth
