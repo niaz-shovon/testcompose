@@ -67,7 +67,8 @@ jobs:
 
       - name: Deploy with Docker Compose
         run: |
-          docker compose -f docker-compose.yml up -d
+          docker compose docker-compose.yml
+#          docker compose -f docker-compose.yml up -d
 
       # Continuous Deployment
 #      - name: Google Auth
