@@ -87,7 +87,7 @@ jobs:
 
       - name: Deploy to Cloud Run
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v2
+#        uses: google-github-actions/deploy-cloudrun@v2
           gcloud run deploy app1 --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1 --allow-unauthenticated
 #        with:
 #          service: ${{ env.DOCKER_IMAGE }}
