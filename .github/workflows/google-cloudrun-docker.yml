@@ -70,7 +70,7 @@ jobs:
           docker compose -f docker-compose.yml up -d
           docker tag app1 asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1
           docker push asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1
-#          gcloud run deploy app1 --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1 --allow-unauthenticated
+          gcloud run deploy app1 --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1 --allow-unauthenticated
 
       # Continuous Deployment
 #      - name: Google Auth
