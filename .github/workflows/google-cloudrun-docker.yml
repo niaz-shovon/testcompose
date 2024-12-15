@@ -91,7 +91,7 @@ jobs:
         with:
           project_id: '${{ env.PROJECT_ID }}'
 
-      - name: Deploy to Cloud Run for ${DOCKER_IMAGE_1}
+      - name: Deploy to Cloud Run for ${{ env.DOCKER_IMAGE_1 }}
         id: deploy1
         uses: google-github-actions/deploy-cloudrun@v2
         with:
@@ -99,7 +99,7 @@ jobs:
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${{ env.DOCKER_IMAGE_1 }} --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
-      - name: Deploy to Cloud Run for ${DOCKER_IMAGE_2}
+      - name: Deploy to Cloud Run for ${{ env.DOCKER_IMAGE_2 }}
         id: deploy2
         uses: google-github-actions/deploy-cloudrun@v2
         with:
@@ -107,7 +107,7 @@ jobs:
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${{ env.DOCKER_IMAGE_2 }} --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
-      - name: Deploy to Cloud Run for ${DOCKER_IMAGE_3}
+      - name: Deploy to Cloud Run for ${{ env.DOCKER_IMAGE_3 }}
         id: deploy3
         uses: google-github-actions/deploy-cloudrun@v2
         with:
@@ -116,13 +116,13 @@ jobs:
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${{ env.DOCKER_IMAGE_3 }} --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       # Cloud Run URL output
-      - name: Show Output for ${DOCKER_IMAGE_1}
+      - name: Show Output for ${{ env.DOCKER_IMAGE_1 }}
         run: echo ${{ steps.deploy1.outputs.url }}
 
       # Cloud Run URL output
-      - name: Show Output for ${DOCKER_IMAGE_2}
+      - name: Show Output for ${{ env.DOCKER_IMAGE_2 }}
         run: echo ${{ steps.deploy2.outputs.url }}
 
       # Cloud Run URL output
-      - name: Show Output for ${DOCKER_IMAGE_3}
+      - name: Show Output for ${{ env.DOCKER_IMAGE_3 }}
         run: echo ${{ steps.deploy3.outputs.url }}
