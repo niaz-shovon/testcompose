@@ -96,7 +96,7 @@ jobs:
         id: deploy1
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: ${{ env.DOCKER_IMAGE }}
+          service: ${{ env.DOCKER_IMAGE_1 }}
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
@@ -104,7 +104,7 @@ jobs:
         id: deploy2
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: ${{ env.DOCKER_IMAGE }}
+          service: ${{ env.DOCKER_IMAGE_2 }}
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app2 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
@@ -112,7 +112,7 @@ jobs:
         id: deploy3
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: ${{ env.DOCKER_IMAGE }}
+          service: ${{ env.DOCKER_IMAGE_3 }}
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app3 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
