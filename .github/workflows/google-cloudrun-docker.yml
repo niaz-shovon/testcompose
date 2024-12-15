@@ -91,7 +91,7 @@ jobs:
           project_id: '${{ env.PROJECT_ID }}'
 
       - name: Deploy to Cloud Run for App1
-        id: deploy
+        id: deploy1
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.DOCKER_IMAGE }}
@@ -99,7 +99,7 @@ jobs:
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       - name: Deploy to Cloud Run for App2
-        id: deploy
+        id: deploy2
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.DOCKER_IMAGE }}
@@ -107,7 +107,7 @@ jobs:
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app2 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       - name: Deploy to Cloud Run for App3
-        id: deploy
+        id: deploy3
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.DOCKER_IMAGE }}
