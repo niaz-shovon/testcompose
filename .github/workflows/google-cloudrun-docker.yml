@@ -117,7 +117,7 @@ jobs:
 
       # Cloud Run URL output
       - name: Show Output for ${{ env.DOCKER_IMAGE_1 }}
-        run: echo ${{ steps.${{ env.DOCKER_IMAGE_1 }}.outputs.url }}
+        run: echo ${{ steps.${DOCKER_IMAGE_1}.outputs.url }}
 
       # Cloud Run URL output
       - name: Show Output for ${{ env.DOCKER_IMAGE_2 }}
