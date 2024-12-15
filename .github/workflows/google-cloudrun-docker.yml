@@ -77,7 +77,6 @@ jobs:
           docker push asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1
           docker push asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app2
           docker push asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app3
-#          gcloud run deploy app1 --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1 --allow-unauthenticated
 
       # Continuous Deployment
       - name: Google Auth
@@ -100,6 +99,10 @@ jobs:
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
+      # Cloud Run URL output-1
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
+
       - name: Deploy to Cloud Run for App2
         id: deploy2
         uses: google-github-actions/deploy-cloudrun@v2
@@ -107,6 +110,10 @@ jobs:
           service: ${{ env.DOCKER_IMAGE_2 }}
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app2 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
+
+      # Cloud Run URL output-2
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
 
       - name: Deploy to Cloud Run for App3
         id: deploy3
@@ -116,7 +123,6 @@ jobs:
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app3 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
-
-      # Cloud Run URL output
+      # Cloud Run URL output-3
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
