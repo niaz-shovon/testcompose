@@ -99,10 +99,6 @@ jobs:
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app1 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
-      # Cloud Run URL output
-      - name: Show Output for App1
-        run: echo ${{ steps.deploy1.outputs.url }}
-
       - name: Deploy to Cloud Run for App2
         id: deploy2
         uses: google-github-actions/deploy-cloudrun@v2
@@ -111,10 +107,6 @@ jobs:
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app2 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
-      # Cloud Run URL output
-      - name: Show Output for App2
-        run: echo ${{ steps.deploy2.outputs.url }}
-
       - name: Deploy to Cloud Run for App3
         id: deploy3
         uses: google-github-actions/deploy-cloudrun@v2
@@ -122,6 +114,14 @@ jobs:
           service: ${{ env.DOCKER_IMAGE_3 }}
           region: ${{ env.REGION }}
           flags: --image asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/app3 --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
+
+      # Cloud Run URL output
+      - name: Show Output for App1
+        run: echo ${{ steps.deploy1.outputs.url }}
+
+      # Cloud Run URL output
+      - name: Show Output for App2
+        run: echo ${{ steps.deploy2.outputs.url }}
 
       # Cloud Run URL output
       - name: Show Output for App3
