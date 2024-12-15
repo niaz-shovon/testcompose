@@ -7,7 +7,9 @@ on:
   pull_request:
 
 env:
-  DOCKER_IMAGE: app1
+  DOCKER_IMAGE_1: app1
+  DOCKER_IMAGE_2: app2
+  DOCKER_IMAGE_3: app3
   PROJECT_ID: serverless-411207
   REGION: asia-southeast1
   REPOSITORY_ID: bdj-serverless-ci-cd-docker-repo
