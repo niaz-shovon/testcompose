@@ -92,7 +92,7 @@ jobs:
           project_id: '${{ env.PROJECT_ID }}'
 
       - name: Deploy to Cloud Run for ${{ env.DOCKER_IMAGE_1 }}
-        id: deploy1
+        id: ${{ env.DOCKER_IMAGE_1 }}
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.DOCKER_IMAGE_1 }}
@@ -117,7 +117,7 @@ jobs:
 
       # Cloud Run URL output
       - name: Show Output for ${{ env.DOCKER_IMAGE_1 }}
-        run: echo ${{ steps.deploy1.outputs.url }}
+        run: echo ${{ steps.${{ env.DOCKER_IMAGE_1 }}.outputs.url }}
 
       # Cloud Run URL output
       - name: Show Output for ${{ env.DOCKER_IMAGE_2 }}
