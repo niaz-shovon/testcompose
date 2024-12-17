@@ -32,18 +32,18 @@ jobs:
           VERSION="${{ github.run_number }}"
           REGISTRY="${REGION}-docker.pkg.dev"
           REPOSITORY="${REGISTRY}/${PROJECT_ID}/${REPOSITORY_ID}"
-          TAG_APP1="${REPOSITORY}/${{ env.DOCKER_IMAGE_1 }}:${VERSION}"
-          TAG_APP2="${REPOSITORY}/${{ env.DOCKER_IMAGE_2 }}:${VERSION}"
-          TAG_APP3="${REPOSITORY}/${{ env.DOCKER_IMAGE_3 }}:${VERSION}"
+          TAG_DOCKER_IMAGE_1="${REPOSITORY}/${{ env.DOCKER_IMAGE_1 }}:${VERSION}"
+          TAG_DOCKER_IMAGE_2="${REPOSITORY}/${{ env.DOCKER_IMAGE_2 }}:${VERSION}"
+          TAG_DOCKER_IMAGE_3="${REPOSITORY}/${{ env.DOCKER_IMAGE_3 }}:${VERSION}"
           echo "registry=${REGISTRY}" >> $GITHUB_OUTPUT
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
-          echo "tag_app1=${TAG_APP1}" >> $GITHUB_OUTPUT
-          echo "tag_app2=${TAG_APP2}" >> $GITHUB_OUTPUT
-          echo "tag_app3=${TAG_APP3}" >> $GITHUB_OUTPUT
+          echo "tag_Docker_Image_1=${TAG_DOCKER_IMAGE_1}" >> $GITHUB_OUTPUT
+          echo "tag_Docker_Image_2=${TAG_DOCKER_IMAGE_2}" >> $GITHUB_OUTPUT
+          echo "tag_Docker_Image_3=${TAG_DOCKER_IMAGE_3}" >> $GITHUB_OUTPUT
           echo "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
-          echo ${TAG_APP1}
-          echo ${TAG_APP2}
-          echo ${TAG_APP3}
+          echo ${TAG_DOCKER_IMAGE_1}
+          echo ${TAG_DOCKER_IMAGE_2}
+          echo ${TAG_DOCKER_IMAGE_3}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
