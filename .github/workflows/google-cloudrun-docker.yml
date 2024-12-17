@@ -32,7 +32,7 @@ jobs:
           VERSION="${{ github.run_number }}"
           REGISTRY="${REGION}-docker.pkg.dev"
           REPOSITORY="${REGISTRY}/${PROJECT_ID}/${REPOSITORY_ID}"
-          TAGS="${REPOSITORY}/${DOCKER_IMAGE}:${VERSION}"
+#          TAGS="${REPOSITORY}/${DOCKER_IMAGE}:${VERSION}"
           TAG_APP1="${REPOSITORY}/${{ env.DOCKER_IMAGE_1 }}:${VERSION}"
           TAG_APP2="${REPOSITORY}/${{ env.DOCKER_IMAGE_2 }}:${VERSION}"
           TAG_APP3="${REPOSITORY}/${{ env.DOCKER_IMAGE_3 }}:${VERSION}"
