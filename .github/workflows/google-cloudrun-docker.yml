@@ -13,7 +13,7 @@ env:
   PROJECT_ID: serverless-411207
   REGION: asia-southeast1
   REPOSITORY_ID: bdj-serverless-ci-cd-docker-repo
-  CONNECTORS_ID: bdjserverlessvpcconnector
+  VPC_CONNECTORS_ID: bdjserverlessvpcconnector
   GCP_SA_KEY: ${{ secrets.SERVERLESS_411207_C41760532440 }}
 
 jobs:
@@ -85,7 +85,7 @@ jobs:
         with:
           service: ${{ env.DOCKER_IMAGE_1 }}
           region: ${{ env.REGION }}
-          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_1 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
+          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_1 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       - name: Deploy to Cloud Run for DOCKER_IMAGE_2
         id: deploy2
@@ -93,7 +93,7 @@ jobs:
         with:
           service: ${{ env.DOCKER_IMAGE_2 }}
           region: ${{ env.REGION }}
-          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_2 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
+          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_2 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       - name: Deploy to Cloud Run for DOCKER_IMAGE_3
         id: deploy3
@@ -101,7 +101,7 @@ jobs:
         with:
           service: ${{ env.DOCKER_IMAGE_3 }}
           region: ${{ env.REGION }}
-          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_3 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
+          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_3 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       # Cloud Run URL output
       - name: Show Output for DOCKER_IMAGE_1
