@@ -42,7 +42,7 @@ jobs:
           echo "tag_app2=${TAG_APP2}" >> $GITHUB_OUTPUT
           echo "tag_app3=${TAG_APP3}" >> $GITHUB_OUTPUT
           echo "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
-          echo ${TAGS}
+#          echo ${TAGS}
           echo ${TAG_APP1}
           echo ${TAG_APP2}
           echo ${TAG_APP3}
