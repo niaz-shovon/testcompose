@@ -33,8 +33,8 @@ jobs:
           REGISTRY="${REGION}-docker.pkg.dev"
           REPOSITORY="${REGISTRY}/${PROJECT_ID}/${REPOSITORY_ID}"
           TAG_DOCKER_IMAGE_1="${REPOSITORY}/${{ env.DOCKER_IMAGE_1 }}"
-          TAG_DOCKER_IMAGE_2="${REPOSITORY}/${{ env.DOCKER_IMAGE_2 }}:${VERSION}"
-          TAG_DOCKER_IMAGE_3="${REPOSITORY}/${{ env.DOCKER_IMAGE_3 }}:${VERSION}"
+          TAG_DOCKER_IMAGE_2="${REPOSITORY}/${{ env.DOCKER_IMAGE_2 }}"
+          TAG_DOCKER_IMAGE_3="${REPOSITORY}/${{ env.DOCKER_IMAGE_3 }}"
           echo "registry=${REGISTRY}" >> $GITHUB_OUTPUT
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "tag_Docker_Image_1=${TAG_DOCKER_IMAGE_1}" >> $GITHUB_OUTPUT
@@ -84,7 +84,7 @@ jobs:
         with:
           service: ${{ env.DOCKER_IMAGE_1 }}
           region: ${{ env.REGION }}
-          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_1 }} --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
+          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_1 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       - name: Deploy to Cloud Run for DOCKER_IMAGE_2
         id: deploy2
