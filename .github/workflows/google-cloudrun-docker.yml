@@ -32,7 +32,7 @@ jobs:
           VERSION="${{ github.run_number }}"
           REGISTRY="${REGION}-docker.pkg.dev"
           REPOSITORY="${REGISTRY}/${PROJECT_ID}/${REPOSITORY_ID}"
-          TAG_DOCKER_IMAGE_1="${REPOSITORY}/${{ env.DOCKER_IMAGE_1 }}:${VERSION}"
+          TAG_DOCKER_IMAGE_1="${REPOSITORY}/${{ env.DOCKER_IMAGE_1 }}"
           TAG_DOCKER_IMAGE_2="${REPOSITORY}/${{ env.DOCKER_IMAGE_2 }}:${VERSION}"
           TAG_DOCKER_IMAGE_3="${REPOSITORY}/${{ env.DOCKER_IMAGE_3 }}:${VERSION}"
           echo "registry=${REGISTRY}" >> $GITHUB_OUTPUT
