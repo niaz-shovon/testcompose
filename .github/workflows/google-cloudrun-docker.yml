@@ -59,10 +59,10 @@ jobs:
       - name: Deploy with Docker Compose
         run: |
           docker compose -f docker-compose.yml up -d
-          docker tag ${DOCKER_IMAGE_1} asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${DOCKER_IMAGE_1}
+          docker tag ${DOCKER_IMAGE_1} ${{ steps.prep.outputs.tag_Docker_Image_1 }}
           docker tag ${DOCKER_IMAGE_2} asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${DOCKER_IMAGE_2}
           docker tag ${DOCKER_IMAGE_3} asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${DOCKER_IMAGE_3}
-          docker push asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${DOCKER_IMAGE_1}
+          docker push ${{ steps.prep.outputs.tag_Docker_Image_1 }}
           docker push asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${DOCKER_IMAGE_2}
           docker push asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${DOCKER_IMAGE_3}
 
