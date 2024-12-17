@@ -84,7 +84,7 @@ jobs:
         with:
           service: ${{ env.DOCKER_IMAGE_1 }}
           region: ${{ env.REGION }}
-          flags: --image ${TAG_DOCKER_IMAGE_1} --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
+          flags: --image ${{ env.TAG_DOCKER_IMAGE_1 }} --allow-unauthenticated --vpc-connector=projects/serverless-411207/locations/asia-southeast1/connectors/bdjserverlessvpcconnector --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       - name: Deploy to Cloud Run for DOCKER_IMAGE_2
         id: deploy2
