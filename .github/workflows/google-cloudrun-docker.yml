@@ -56,15 +56,28 @@ jobs:
           username: _json_key
           password: ${{ env.GCP_SA_KEY }}
 
-      - name: Deploy with Docker Compose
+#      - name: Deploy with Docker Compose
+#        run: |
+#          docker compose -f docker-compose.yml up -d
+#          docker tag ${DOCKER_IMAGE_1} ${{ steps.prep.outputs.tag_Docker_Image_1 }}
+#          docker tag ${DOCKER_IMAGE_2} ${{ steps.prep.outputs.tag_Docker_Image_2 }}
+#          docker tag ${DOCKER_IMAGE_3} ${{ steps.prep.outputs.tag_Docker_Image_3 }}
+#          docker push ${{ steps.prep.outputs.tag_Docker_Image_1 }}
+#          docker push ${{ steps.prep.outputs.tag_Docker_Image_2 }}
+#          docker push ${{ steps.prep.outputs.tag_Docker_Image_3 }}
+
+      - name: Build and push images for all Docker Compose services
         run: |
-          docker compose -f docker-compose.yml up -d
-          docker tag ${DOCKER_IMAGE_1} ${{ steps.prep.outputs.tag_Docker_Image_1 }}
-          docker tag ${DOCKER_IMAGE_2} ${{ steps.prep.outputs.tag_Docker_Image_2 }}
-          docker tag ${DOCKER_IMAGE_3} ${{ steps.prep.outputs.tag_Docker_Image_3 }}
-          docker push ${{ steps.prep.outputs.tag_Docker_Image_1 }}
-          docker push ${{ steps.prep.outputs.tag_Docker_Image_2 }}
-          docker push ${{ steps.prep.outputs.tag_Docker_Image_3 }}
+          # Loop through all services in docker-compose.yml
+          for SERVICE in $(docker-compose config --services); do
+            IMAGE="${{ steps.prep.outputs.repository }}/${SERVICE}:${{ steps.prep.outputs.version }}"
+            echo "Building and pushing image for service: $SERVICE -> $IMAGE"
+            
+            # Build and push the image for the service
+            docker-compose build $SERVICE
+            docker tag $SERVICE $IMAGE
+            docker push $IMAGE
+          done
 
       # Continuous Deployment
       - name: Google Auth
