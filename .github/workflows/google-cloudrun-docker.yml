@@ -7,9 +7,9 @@ on:
   pull_request:
 
 env:
-  DOCKER_IMAGE_1: app1
-  DOCKER_IMAGE_2: app2
-  DOCKER_IMAGE_3: app3
+#  DOCKER_IMAGE_1: app1
+#  DOCKER_IMAGE_2: app2
+#  DOCKER_IMAGE_3: app3
   PROJECT_ID: serverless-411207
   REGION: asia-southeast1
   REPOSITORY_ID: bdj-serverless-ci-cd-docker-repo
@@ -80,50 +80,50 @@ jobs:
           done
 
       # Continuous Deployment
-      - name: Google Auth
-        id: auth
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ env.GCP_SA_KEY }}
-          token_format: 'access_token'
+#      - name: Google Auth
+#        id: auth
+#        uses: google-github-actions/auth@v2
+#        with:
+#          credentials_json: ${{ env.GCP_SA_KEY }}
+#          token_format: 'access_token'
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: '${{ env.PROJECT_ID }}'
+#      - name: Set up Cloud SDK
+#        uses: google-github-actions/setup-gcloud@v2
+#        with:
+#          project_id: '${{ env.PROJECT_ID }}'
 
-      - name: Deploy to Cloud Run for DOCKER_IMAGE_1
-        id: deploy1
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.DOCKER_IMAGE_1 }}
-          region: ${{ env.REGION }}
-          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_1 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
+#      - name: Deploy to Cloud Run for DOCKER_IMAGE_1
+#        id: deploy1
+#        uses: google-github-actions/deploy-cloudrun@v2
+#        with:
+#          service: ${{ env.DOCKER_IMAGE_1 }}
+#          region: ${{ env.REGION }}
+#          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_1 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
-      - name: Deploy to Cloud Run for DOCKER_IMAGE_2
-        id: deploy2
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.DOCKER_IMAGE_2 }}
-          region: ${{ env.REGION }}
-          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_2 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
+#      - name: Deploy to Cloud Run for DOCKER_IMAGE_2
+#        id: deploy2
+#        uses: google-github-actions/deploy-cloudrun@v2
+#        with:
+#          service: ${{ env.DOCKER_IMAGE_2 }}
+#          region: ${{ env.REGION }}
+#          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_2 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
-      - name: Deploy to Cloud Run for DOCKER_IMAGE_3
-        id: deploy3
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.DOCKER_IMAGE_3 }}
-          region: ${{ env.REGION }}
-          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_3 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
-
-      # Cloud Run URL output
-      - name: Show Output for DOCKER_IMAGE_1
-        run: echo ${{ steps.deploy1.outputs.url }}
+#      - name: Deploy to Cloud Run for DOCKER_IMAGE_3
+#        id: deploy3
+#        uses: google-github-actions/deploy-cloudrun@v2
+#        with:
+#          service: ${{ env.DOCKER_IMAGE_3 }}
+#          region: ${{ env.REGION }}
+#          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_3 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       # Cloud Run URL output
-      - name: Show Output for DOCKER_IMAGE_2
-        run: echo ${{ steps.deploy2.outputs.url }}
+#      - name: Show Output for DOCKER_IMAGE_1
+#        run: echo ${{ steps.deploy1.outputs.url }}
 
       # Cloud Run URL output
-      - name: Show Output for DOCKER_IMAGE_3
-        run: echo ${{ steps.deploy3.outputs.url }}
+#      - name: Show Output for DOCKER_IMAGE_2
+#        run: echo ${{ steps.deploy2.outputs.url }}
+
+      # Cloud Run URL output
+#      - name: Show Output for DOCKER_IMAGE_3
+#        run: echo ${{ steps.deploy3.outputs.url }}
