@@ -71,7 +71,7 @@ jobs:
         run: |
           # Loop through all services in docker-compose.yml
           for SERVICE in $(docker compose config --services); do
-            IMAGE="${REPOSITORY}/${SERVICE}"
+            IMAGE="asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${SERVICE}"
             echo ${IMAGE}
             echo "Building and pushing image for service: $SERVICE -> $IMAGE"
             
