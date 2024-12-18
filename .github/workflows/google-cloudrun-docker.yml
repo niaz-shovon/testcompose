@@ -75,6 +75,7 @@ jobs:
             echo "Building and pushing image for service: $SERVICE -> $IMAGE"
             
             # Build and push the image for the service
+            echo $(IMAGE)
             docker compose build $SERVICE
             docker tag $SERVICE $IMAGE
             docker push $IMAGE
