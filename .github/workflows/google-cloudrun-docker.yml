@@ -45,6 +45,7 @@ jobs:
           echo ${TAG_DOCKER_IMAGE_1}
           echo ${TAG_DOCKER_IMAGE_2}
           echo ${TAG_DOCKER_IMAGE_3}
+          echo $(docker compose config --services)
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
