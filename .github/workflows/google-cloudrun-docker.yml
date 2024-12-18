@@ -72,11 +72,10 @@ jobs:
           # Loop through all services in docker-compose.yml
           for SERVICE in $(docker compose config --services); do
             IMAGE="${{ steps.prep.outputs.repository }}/${SERVICE}"
+            echo ${IMAGE}
             echo "Building and pushing image for service: $SERVICE -> $IMAGE"
             
             # Build and push the image for the service
-            echo $(SERVICE)
-            echo $(IMAGE)            
             docker compose build $SERVICE
             docker tag $SERVICE $IMAGE
             docker push $IMAGE
