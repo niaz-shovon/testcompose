@@ -7,9 +7,6 @@ on:
   pull_request:
 
 env:
-#  DOCKER_IMAGE_1: app1
-#  DOCKER_IMAGE_2: app2
-#  DOCKER_IMAGE_3: app3
   PROJECT_ID: serverless-411207
   REGION: asia-southeast1
   REPOSITORY_ID: bdj-serverless-ci-cd-docker-repo
@@ -57,16 +54,6 @@ jobs:
           username: _json_key
           password: ${{ env.GCP_SA_KEY }}
 
-#      - name: Deploy with Docker Compose
-#        run: |
-#          docker compose -f docker-compose.yml up -d
-#          docker tag ${DOCKER_IMAGE_1} ${{ steps.prep.outputs.tag_Docker_Image_1 }}
-#          docker tag ${DOCKER_IMAGE_2} ${{ steps.prep.outputs.tag_Docker_Image_2 }}
-#          docker tag ${DOCKER_IMAGE_3} ${{ steps.prep.outputs.tag_Docker_Image_3 }}
-#          docker push ${{ steps.prep.outputs.tag_Docker_Image_1 }}
-#          docker push ${{ steps.prep.outputs.tag_Docker_Image_2 }}
-#          docker push ${{ steps.prep.outputs.tag_Docker_Image_3 }}
-
       - name: Build and push images for all Docker Compose services
         run: |
           # Loop through all services in docker-compose.yml
@@ -109,30 +96,6 @@ jobs:
               --vpc-egress=all-traffic \
               --set-env-vars=ASP_NET_CORE=development
           done
-
-#      - name: Deploy to Cloud Run for DOCKER_IMAGE_1
-#        id: deploy1
-#        uses: google-github-actions/deploy-cloudrun@v2
-#        with:
-#          service: ${{ env.DOCKER_IMAGE_1 }}
-#          region: ${{ env.REGION }}
-#          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_1 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
-
-#      - name: Deploy to Cloud Run for DOCKER_IMAGE_2
-#        id: deploy2
-#        uses: google-github-actions/deploy-cloudrun@v2
-#        with:
-#          service: ${{ env.DOCKER_IMAGE_2 }}
-#          region: ${{ env.REGION }}
-#          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_2 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
-
-#      - name: Deploy to Cloud Run for DOCKER_IMAGE_3
-#        id: deploy3
-#        uses: google-github-actions/deploy-cloudrun@v2
-#        with:
-#          service: ${{ env.DOCKER_IMAGE_3 }}
-#          region: ${{ env.REGION }}
-#          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_3 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       # Cloud Run URL output
       - name: Show Cloud Run Services
