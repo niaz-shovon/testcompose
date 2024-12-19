@@ -135,13 +135,10 @@ jobs:
 #          flags: --image ${{ steps.prep.outputs.tag_Docker_Image_3 }} --allow-unauthenticated --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} --vpc-egress=all-traffic --set-env-vars=ASP_NET_CORE=development
 
       # Cloud Run URL output
-#      - name: Show Output for DOCKER_IMAGE_1
-#        run: echo ${{ steps.deploy1.outputs.url }}
-
-      # Cloud Run URL output
-#      - name: Show Output for DOCKER_IMAGE_2
-#        run: echo ${{ steps.deploy2.outputs.url }}
-
-      # Cloud Run URL output
-#      - name: Show Output for DOCKER_IMAGE_3
-#        run: echo ${{ steps.deploy3.outputs.url }}
+      - name: Show Cloud Run Services
+        run: |
+          echo "Deployed services:"
+          for SERVICE in $(docker compose config --services); do
+            URL=$(gcloud run services describe $SERVICE --region=${{ env.REGION }} --format='value(status.url)')
+            echo "$SERVICE -> $URL"
+          done
