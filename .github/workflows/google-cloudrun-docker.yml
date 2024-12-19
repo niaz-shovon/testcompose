@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-tag-push-deploy:
-    name: Build, tag, push Docker image and deploy to Cloud Run
+    name: Prepare, Build, Push Docker image and Deploy to Cloud Run
     runs-on: ubuntu-latest
     environment: Production
 
@@ -30,18 +30,10 @@ jobs:
           VERSION="${{ github.run_number }}"
           REGISTRY="${REGION}-docker.pkg.dev"
           REPOSITORY="${REGISTRY}/${PROJECT_ID}/${REPOSITORY_ID}"
-          TAG_DOCKER_IMAGE_1="${REPOSITORY}/${{ env.DOCKER_IMAGE_1 }}"
-          TAG_DOCKER_IMAGE_2="${REPOSITORY}/${{ env.DOCKER_IMAGE_2 }}"
-          TAG_DOCKER_IMAGE_3="${REPOSITORY}/${{ env.DOCKER_IMAGE_3 }}"
           echo "registry=${REGISTRY}" >> $GITHUB_OUTPUT
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
-          echo "tag_Docker_Image_1=${TAG_DOCKER_IMAGE_1}" >> $GITHUB_OUTPUT
-          echo "tag_Docker_Image_2=${TAG_DOCKER_IMAGE_2}" >> $GITHUB_OUTPUT
-          echo "tag_Docker_Image_3=${TAG_DOCKER_IMAGE_3}" >> $GITHUB_OUTPUT
+          echo "repository=${REPOSITORY}" >> $GITHUB_OUTPUT
           echo "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
-          echo ${TAG_DOCKER_IMAGE_1}
-          echo ${TAG_DOCKER_IMAGE_2}
-          echo ${TAG_DOCKER_IMAGE_3}
           echo $(docker compose config --services)
 
       - name: Set up Docker Buildx
