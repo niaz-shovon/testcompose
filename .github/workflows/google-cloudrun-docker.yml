@@ -34,7 +34,8 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "repository=${REPOSITORY}" >> $GITHUB_OUTPUT
           echo "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
-          echo "List of services: $(docker compose config --services)"
+          echo "List of services: "
+          echo $(docker compose config --services)
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -77,7 +78,7 @@ jobs:
         run: |
           # Deploy each service defined in docker-compose.yml to Cloud Run
           for SERVICE in $(docker compose config --services); do
-            IMAGE="asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${SERVICE}"
+            IMAGE="${{ steps.prep.outputs.repository }}/${SERVICE}"
             echo "Deploying service: $SERVICE to Cloud Run with image: $IMAGE"
             
             gcloud run deploy $SERVICE \
