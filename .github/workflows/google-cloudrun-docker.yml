@@ -94,6 +94,22 @@ jobs:
         with:
           project_id: '${{ env.PROJECT_ID }}'
 
+      - name: Deploy each service to Cloud Run
+        run: |
+          # Deploy each service defined in docker-compose.yml to Cloud Run
+          for SERVICE in $(docker compose config --services); do
+            IMAGE="asia-southeast1-docker.pkg.dev/serverless-411207/bdj-serverless-ci-cd-docker-repo/${SERVICE}"
+            echo "Deploying service: $SERVICE to Cloud Run with image: $IMAGE"
+            
+            gcloud run deploy $SERVICE \
+              --image=$IMAGE \
+              --region=${{ env.REGION }} \
+              --allow-unauthenticated \
+              --vpc-connector=projects/${{ env.PROJECT_ID }}/locations/${{ env.REGION }}/connectors/${{ env.VPC_CONNECTORS_ID }} \
+              --vpc-egress=all-traffic \
+              --set-env-vars=ASP_NET_CORE=development
+          done
+
 #      - name: Deploy to Cloud Run for DOCKER_IMAGE_1
 #        id: deploy1
 #        uses: google-github-actions/deploy-cloudrun@v2
